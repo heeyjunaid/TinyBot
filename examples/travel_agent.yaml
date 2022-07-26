@@ -1,0 +1,77 @@
+# This is a config file required to train a virtual agent using tinybot
+name: Anna - Your travel companion
+verison: 0.0.1
+
+# knowledge base with answer to some basic questions
+knowledge_base:
+    who are you?: I am Anna, your travel companion. I can help you with all your travel related queries.
+    what is your name ?: My name is Anna.
+    How can you help me?: I can help you with all of your travel realted queries like "Booking a ticket", "Checking schedule of train or airplane", "Booking a hotel for you".
+    How can I cancel my ticket?: You can cancel your ticket by visiting to cancel-ticket.example.com
+
+# All intents and training phrases required for virtual agent
+intents:
+    book_ticket:
+        - book ticket
+        - I want to book a ticket
+        - can you book a ticket for me?
+        - can you help me booking flight ticket
+        - can you help me booking train ticket
+        - book ticket for me
+    check_schedule:
+        - check schedule
+        - check train schedule for me
+        - can you check my travel schedule
+        - i want to check schedule of train
+        - i want to check schedule of airplane
+        - help me with travel schedule
+    book_hotel:
+        - i want to book a hotel for me
+        - help me with hotel booking
+        - can you book a hotel room for me?
+        - book hotel
+        - please book a hotel for me
+    default_hello:
+        - hey
+        - hello
+        - hi
+        - hello hello
+    default_fallback:
+        -
+# all slots that you want to use during conversation
+slots:
+    -
+
+# flow is a complete dialog for a given virtual agent tasks like - "book a ticket"
+# each flow can contains multiple blocks which are basic building block of flow.
+# types of block "ask", "say"
+flows:
+    - name: welcome flow
+      description: welcome flow
+      is_start_flow: True  # specify true when you want to start conversation with this flow
+      # intent on which the flow will trigger
+      trigger_intents:
+          - default_hello
+      # defination of all the blocks
+      blocks:
+          - type: say
+            response: Hello, I'm Anna. Your travel companion. I can help you with following things
+            quick_replies:
+                - Book Ticket
+                - Book Hotel
+                - Check Travel Schedule
+
+    - name: Book Ticket
+      description: Book Ticket
+      # intent on which the flow will trigger
+      trigger_intents:
+          - book_ticket
+      # defination of all the blocks
+      blocks:
+          - type: ask
+            response: Sure, where you would like to travel?
+            quick_replies:
+                - Mumbai
+                - Delhi
+                - Pune
+                - Banglore
