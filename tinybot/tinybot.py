@@ -45,13 +45,17 @@ def train(config_path, root_dir = "./"):
     trainer = Trainer()
 
     # training intent classifier
-    intent_classifier_path = os.path.join(model_caching_dir, "intent_classifier.pkl")
-    trainer.train_intent_classifier(agent_config["intents"], Config.classifier_head, intent_classifier_path)
+    # intent_classifier_path = os.path.join(model_caching_dir, "intent_classifier.pkl")
+    # trainer.train_intent_classifier(agent_config["intents"], Config.classifier_head, intent_classifier_path)
+
+    # training a semantic similarity model
+    similarity_model_path = os.path.join(model_caching_dir, "similarity_model.pkl")
+    trainer.train_semantic_similarity_model(agent_config["knowledge_base"], similarity_model_path)
 
     # training contextual token classifier
     # TODO:
 
-
+    
 
 
 

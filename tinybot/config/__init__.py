@@ -10,5 +10,5 @@ __all__ = ["Config"]
 class Config:
     bert_model = "bert-base-uncased"
     classifier_head = "logistics-regression"
-    model_caching_dir = "model"
+    model_caching_dir = "models"
     max_training_iter = 200 # max training iteration for ML model

@@ -2,6 +2,10 @@
 name: Anna
 verison: 0.0.1
 
+nlu_settings : 
+    faq_threshold : 0.9
+    classifier_threshold : 0.7
+
 # knowledge base with answer to some basic questions
 knowledge_base:
     who are you?: I am Anna, your travel companion. I can help you with all your travel related queries.
