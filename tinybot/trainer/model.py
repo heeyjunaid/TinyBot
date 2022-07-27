@@ -31,9 +31,12 @@ class Model:
     def load(self, model_path):
         print(f"loading model from {model_path} ...")
         
-        with open(model_path, 'wb') as m:
-            self = pickle.dump(self, m)
-        
+        with open(model_path, 'rb') as m:
+            obj = pickle.load(m)
+
+        self.__dict__.update(obj.__dict__)
+        # deleting pickle object instance
+        del obj
         print(f"model loading completed.")
 
     def predict(self, query):
