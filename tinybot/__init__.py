@@ -1,0 +1,1 @@
+from tinybot.tinybot import train, load

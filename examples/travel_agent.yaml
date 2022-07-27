@@ -1,5 +1,5 @@
 # This is a config file required to train a virtual agent using tinybot
-name: Anna - Your travel companion
+name: Anna
 verison: 0.0.1
 
 # knowledge base with answer to some basic questions
@@ -32,12 +32,14 @@ intents:
         - book hotel
         - please book a hotel for me
     default_hello:
-        - hey
-        - hello
         - hi
-        - hello hello
-    default_fallback:
-        -
+        - hello
+        - just going to say hi
+        - hey there
+        - hello there
+        - greetings
+    # default_fallback:
+    #     -
 # all slots that you want to use during conversation
 slots:
     -

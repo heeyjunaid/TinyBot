@@ -21,7 +21,7 @@ class Dataset(Queries, Labels):
         """
             return
             {
-                "input_idx" : [],
+                "input_ids" : [],
                 attention_mask : [],
                 token_type_ids: []
                 labels : []
