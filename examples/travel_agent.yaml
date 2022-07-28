@@ -96,13 +96,19 @@ flows:
           - type: say
             response: sure, I can definetly help you with that
           - type: ask
-            response: where you would like to travel?
+            response: Please Tell me your 5 digit ticket ID
+            slot:
+                - ticket_id
+          - type: say
+            response: Thanks, Please wait while I fetch your booking details
+          - type: say
+            response: You have a train ticket booked from Mumbai to Pune with ticket id ${ticket_id} on Aug 15, 22 at 9 P.M.
+          - type: say
+            response: Is there anything you would like me to do?.
             rich_response:
                 quick_replies:
-                    - Mumbai
-                    - Delhi
-                    - Pune
-                    - Banglore
+                    - Book Ticket
+                    - Book Hotel
 
     - name: Book Hotel
       description: flow to book hotel
