@@ -109,7 +109,7 @@ flows:
                     - Pune
                     - Banglore
           - type: ask
-            response: where you would like to travel?
+            response: What is your source city?
             slot:
               - src_city
             rich_response:
