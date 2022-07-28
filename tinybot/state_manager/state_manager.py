@@ -29,8 +29,12 @@ class StateManager(StateBase):
             block = self.init_block("say", intent)
             return block.compile_response(self.agent_name)
         
-        slot_detected = False
-        if self.current_block_object.type == "ask" and self.current_block_object.question_asked:
+        if intent != "default_fallback" and self.intent_flow_mapping.get(intent, None) is not None:
+            # move to some other flow
+            self.current_flow = self.intent_flow_mapping.get(intent)
+            self.current_block = 0
+
+        elif self.current_block_object.type == "ask" and self.current_block_object.question_asked:
             slot_detected = self.current_block_object.detect_slots(query)
             
             if slot_detected:
@@ -40,10 +44,6 @@ class StateManager(StateBase):
             block = self.init_block("say", Config.fallback_response)
             return block.compile_response(self.agent_name)
         
-        if not slot_detected and self.intent_flow_mapping.get(intent, None) is not None:
-            # move to some other flow
-            self.current_flow = self.intent_flow_mapping.get(intent)
-            self.current_block = 0
         
 
         # continue previous flow

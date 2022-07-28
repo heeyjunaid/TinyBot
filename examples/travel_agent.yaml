@@ -4,7 +4,7 @@ verison: 0.0.1
 
 nlu_settings:
     faq_threshold: 0.95
-    classifier_threshold: 0.85
+    classifier_threshold: 0.8
 
 # knowledge base with answer to some basic questions
 knowledge_base:
@@ -22,6 +22,12 @@ intents:
         - can you help me booking flight ticket
         - can you help me booking train ticket
         - book ticket for me
+        - please book a ticket for me
+        - book a ticket for me
+        - can you book ticket for me?
+        - ticket booking
+        - ticket book
+        - help me with booking ticket
     check_schedule:
         - check schedule
         - check train schedule for me
@@ -29,19 +35,34 @@ intents:
         - i want to check schedule of train
         - i want to check schedule of airplane
         - help me with travel schedule
+        - please check schedule for me
+        - check my travel schedule
+        - schedule check
+        - show me my travel schedule
     book_hotel:
         - i want to book a hotel for me
         - help me with hotel booking
         - can you book a hotel room for me?
         - book hotel
         - please book a hotel for me
-    default_hello:
-        - hi
-        - hello
-        - just going to say hi
-        - hey there
-        - hello there
-        - greetings
+        - book a hotel
+        - hotel booking
+        - can you help me with booking a suite in hotel
+        - hotel suite booking
+        - book hotel for me
+        - i want to book hotel
+    # default_hello:
+    #     - hi
+    #     - hello
+    #     - just going to say hi
+    #     - hey there
+    #     - hello there
+    #     - greetings
+    #     - hey
+    #     - hey there
+    #     - hello
+    #     - hola
+    #     - greet
     # default_fallback:
     #     -
 # all slots that you want to use during conversation
@@ -168,7 +189,7 @@ flows:
                 quick_replies:
                     - JW Marriot
                     - Radission Blue
-                    - Taj
+                    - Grad Hayaat
           - type: ask
             response: Which suit you would like to choose ?
             slot:
