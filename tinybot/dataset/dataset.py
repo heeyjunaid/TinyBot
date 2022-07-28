@@ -8,13 +8,13 @@ __all__ = ["Dataset"]
 
 
 class Dataset(Queries, Labels):
-    def __init__(self, sentences : List[str], labels: List[str], tokenizer) -> None:
+    def __init__(self, sentences : List[str], labels: List[str], tokenizer, is_kb = False) -> None:
         self.sentences = sentences
         self.labels = labels
         self.tokenizer = tokenizer
 
         Queries.__init__(self, self.sentences)
-        Labels.__init__(self, self.labels)
+        Labels.__init__(self, self.labels, is_kb)
 
 
     def get_training_dataset(self, return_tensors = "pt", padding = True):

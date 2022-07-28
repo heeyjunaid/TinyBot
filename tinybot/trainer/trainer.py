@@ -3,7 +3,6 @@
 """
 
 from transformers import BertModel, BertTokenizer
-from tinybot import dataset
 
 
 from tinybot.config import Config
@@ -49,7 +48,7 @@ class Trainer:
         questions = list(faq_pairs.keys())
         answers = list(faq_pairs.values())
 
-        dataset = Dataset(questions, answers, self.tokenizer)
+        dataset = Dataset(questions, answers, self.tokenizer, True)
         
         similarity_matcher = Similarity()
         similarity_matcher.train(dataset, self.bert_encoder)

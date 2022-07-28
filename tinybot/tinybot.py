@@ -1,12 +1,17 @@
 """
     
 """
+from http.client import responses
 import os
+from tinybot.dataset import query
+from urllib import response
+from libcst import While
 import yaml
 import shutil
 
 from tinybot.config import Config
 from tinybot.trainer import Trainer
+from tinybot.state_manager import StateManager
 
 
 
@@ -68,4 +73,26 @@ def load(agent_dir):
     intent_classifier_path = os.path.join(model_caching_dir, "intent_classifier.pkl")
     similarity_model_path = os.path.join(model_caching_dir, "similarity_model.pkl")
 
+    # initializing new state
+    state_manager = StateManager(agent_config["name"], agent_config["flows"], agent_config["nlu_settings"], intent_classifier_path, similarity_model_path)
+    
+    print("\nStarting TinyBot... \n")
+    print("-"*100)
+
+    responses = state_manager.process_query('', "event.welcome")
+    print_repsonse(responses)
+
+    while True:
+        query = input(f"user \t >> ")
+        responses = state_manager.process_query(query)
+        print_repsonse(responses)
+
+    
+
+
+
+def print_repsonse(responses):
+    for res in responses:
+        print(res)
+    print("-"*100)
     

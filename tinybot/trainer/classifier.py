@@ -1,6 +1,7 @@
 """
     Code to train intent classification model
 """
+import numpy as np
 from sklearn.linear_model import LogisticRegression
 
 from tinybot.trainer import Model
@@ -42,6 +43,6 @@ class IntentClassifier(Model):
         tokens = query.tokenize(tokenizer, "pt", True)
         features = self.get_feature_vectors(tokens["input_ids"], tokens["attention_mask"], bert_encoder)
 
-        preds = self.clr_head.predict(features)
-        
-        return self.label_mapping[preds[0]]
+        preds = self.clr_head.predict_proba(features)
+        idx = np.argmax(preds)
+        return self.label_mapping[idx], preds[0][idx]   # return class and probablity
