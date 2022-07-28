@@ -86,9 +86,11 @@ def load(agent_dir):
             print_repsonse(responses)
         except KeyboardInterrupt:
             print("\nClosing TinyBot..")
+            break
         except Exception as e:
             print(f"error occured - {e}")
             raise
+            break
     
 
 
