@@ -1,1 +1,2 @@
-from tinybot.tinybot import train, load
+from .tinybot import train, load
+from .config import Config

@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 
 setup(name='tinybot',
@@ -7,7 +7,8 @@ setup(name='tinybot',
       author='Junaid Shaikh',
       author_email='junaidlatur@gmail.com',
       url='https://github.com/heeyjunaid/TinyBot',
-      packages=['tinybot'],
+      packages=find_packages(),
+      # package_dir={"tinybot":"tinybot"},
       install_requires=[
             "PyYAML",
             "scikit-learn>=1.0.0",

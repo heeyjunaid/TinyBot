@@ -6,9 +6,9 @@ import yaml
 import shutil
 
 
-from tinybot.config import Config
-from tinybot.trainer import Trainer
-from tinybot.state_manager import StateManager
+from .config import Config
+from .trainer import Trainer
+from .state_manager import StateManager
 
 
 
@@ -80,10 +80,15 @@ def load(agent_dir):
     print_repsonse(responses)
 
     while True:
-        query = input(f"user \t >> ")
-        responses = state_manager.process_query(query)
-        print_repsonse(responses)
-
+        try:
+            query = input(f"user \t >> ")
+            responses = state_manager.process_query(query)
+            print_repsonse(responses)
+        except KeyboardInterrupt:
+            print("\nClosing TinyBot..")
+        except Exception as e:
+            print(f"error occured - {e}")
+            raise
     
 
 
