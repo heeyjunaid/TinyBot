@@ -189,7 +189,7 @@ flows:
                 quick_replies:
                     - JW Marriot
                     - Radission Blue
-                    - Grad Hayaat
+                    - Grand Hayaat
           - type: ask
             response: Which suit you would like to choose ?
             slot:
