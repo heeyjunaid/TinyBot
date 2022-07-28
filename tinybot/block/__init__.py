@@ -1,0 +1,1 @@
+from tinybot.block.base import BlockBase

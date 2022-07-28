@@ -45,8 +45,8 @@ def train(config_path, root_dir = "./"):
     trainer = Trainer()
 
     # training intent classifier
-    # intent_classifier_path = os.path.join(model_caching_dir, "intent_classifier.pkl")
-    # trainer.train_intent_classifier(agent_config["intents"], Config.classifier_head, intent_classifier_path)
+    intent_classifier_path = os.path.join(model_caching_dir, "intent_classifier.pkl")
+    trainer.train_intent_classifier(agent_config["intents"], Config.classifier_head, intent_classifier_path)
 
     # training a semantic similarity model
     similarity_model_path = os.path.join(model_caching_dir, "similarity_model.pkl")
@@ -64,4 +64,8 @@ def load(agent_dir):
     config_path = os.path.join(agent_dir, "config.yaml")
     agent_config = read_agent_config(config_path)
 
-    print(agent_config)
+    model_caching_dir = os.path.join(agent_dir, Config.model_caching_dir)
+    intent_classifier_path = os.path.join(model_caching_dir, "intent_classifier.pkl")
+    similarity_model_path = os.path.join(model_caching_dir, "similarity_model.pkl")
+
+    

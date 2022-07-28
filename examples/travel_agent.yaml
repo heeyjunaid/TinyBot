@@ -2,9 +2,9 @@
 name: Anna
 verison: 0.0.1
 
-nlu_settings : 
-    faq_threshold : 0.9
-    classifier_threshold : 0.7
+nlu_settings:
+    faq_threshold: 0.9
+    classifier_threshold: 0.7
 
 # knowledge base with answer to some basic questions
 knowledge_base:
@@ -54,18 +54,19 @@ slots:
 flows:
     - name: welcome flow
       description: welcome flow
-      is_start_flow: True  # specify true when you want to start conversation with this flow
+      is_start_flow: True # specify true when you want to start conversation with this flow
       # intent on which the flow will trigger
       trigger_intents:
           - default_hello
       # defination of all the blocks
       blocks:
-          - type: say
+          - type: ask
             response: Hello, I'm Anna. Your travel companion. I can help you with following things
-            quick_replies:
-                - Book Ticket
-                - Book Hotel
-                - Check Travel Schedule
+            rich_response:
+                quick_replies:
+                    - Book Ticket
+                    - Book Hotel
+                    - Check Travel Schedule
 
     - name: Book Ticket
       description: Book Ticket
@@ -74,10 +75,13 @@ flows:
           - book_ticket
       # defination of all the blocks
       blocks:
+          - type: say
+            response: sure, I can definetly help you with that
           - type: ask
-            response: Sure, where you would like to travel?
-            quick_replies:
-                - Mumbai
-                - Delhi
-                - Pune
-                - Banglore
+            response: where you would like to travel?
+            rich_response:
+                quick_replies:
+                    - Mumbai
+                    - Delhi
+                    - Pune
+                    - Banglore
