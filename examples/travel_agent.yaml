@@ -3,8 +3,8 @@ name: Anna
 verison: 0.0.1
 
 nlu_settings:
-    faq_threshold: 0.9
-    classifier_threshold: 0.8
+    faq_threshold: 0.95
+    classifier_threshold: 0.85
 
 # knowledge base with answer to some basic questions
 knowledge_base:
@@ -79,12 +79,42 @@ flows:
             response: sure, I can definetly help you with that
           - type: ask
             response: where you would like to travel?
+            slot:
+              - dest_city
             rich_response:
                 quick_replies:
                     - Mumbai
                     - Delhi
                     - Pune
                     - Banglore
+          - type: ask
+            response: where you would like to travel?
+            slot:
+              - src_city
+            rich_response:
+                quick_replies:
+                    - Chennai
+                    - Mohali
+                    - Noida
+                    - Kolkata
+          - type: ask
+            response: When you would like to travel?
+            slot:
+              - travel_time
+            rich_response:
+                quick_replies:
+                    - Tomorrow
+                    - Next Week
+                    - Next Month
+          - type: say
+            response : Thanks, Your ticket has been booked from ${src_city} to ${dest_city} on ${travel_time}
+          - type: say
+            response : Is there anything you would like me to do?.
+            rich_response:
+                quick_replies:
+                    - Book Hotel
+                    - Check Travel Schedule
+          
 
     - name: Check Schedule
       description: flow to check schedule
@@ -149,7 +179,7 @@ flows:
                     - King
                     - Presidential
           - type: say
-            response: Done, I have booked you ${booking_hotel_suite} in ${booking_hotel} on ${booking_date}.
+            response: Done, I have booked you ${booking_hotel_suite} suite in ${booking_hotel} on ${booking_date}.
           - type: say
             response: Is there anything you would like me to do?.
             rich_response:

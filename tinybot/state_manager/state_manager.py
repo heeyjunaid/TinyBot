@@ -1,5 +1,4 @@
 from tinybot.config import Config
-from numpy import block
 from tinybot.state_manager import StateBase
 
 
@@ -10,6 +9,8 @@ class StateManager(StateBase):
     def __init__(self, agent_name, flows, nlu_settings, intent_classifier_path, similarity_model_path) -> None:
         """ Class Manages state of the TinyBot
         """
+        self.current_block_object = None
+        self.context = {}
         super().__init__(agent_name, flows, nlu_settings, intent_classifier_path, similarity_model_path)
 
 
@@ -27,12 +28,19 @@ class StateManager(StateBase):
         if kb_answer:
             block = self.init_block("say", intent)
             return block.compile_response(self.agent_name)
+        
+        slot_detected = False
+        if self.current_block_object.type == "ask" and self.current_block_object.question_asked:
+            slot_detected = self.current_block_object.detect_slots(query)
+            
+            if slot_detected:
+                self.current_block += 1
 
-        if intent == "default_fallback":
+        elif intent == "default_fallback":
             block = self.init_block("say", Config.fallback_response)
             return block.compile_response(self.agent_name)
         
-        if self.intent_flow_mapping.get(intent, None) is not None:
+        if not slot_detected and self.intent_flow_mapping.get(intent, None) is not None:
             # move to some other flow
             self.current_flow = self.intent_flow_mapping.get(intent)
             self.current_block = 0
@@ -53,17 +61,19 @@ class StateManager(StateBase):
         flw = self.flows[self.current_flow]
 
         while True:
-            block = flw["blocks"][self.current_block]
-            block = self.init_block(block["type"], block["response"], block.get("rich_response", {}))
+            self.current_block_object = flw["blocks"][self.current_block]
+            self.current_block_object = self.init_block(self.current_block_object["type"], self.current_block_object["response"], self.current_block_object.get("rich_response", {}),
+                                                        self.current_block_object.get("slot", []),  self.context)
 
-            yield block.compile_response(self.agent_name)
+            yield self.current_block_object.compile_response(self.agent_name)
 
-            if block.type == "ask":
+            if self.current_block_object.type == "ask":
+                self.current_block_object.question_asked = True
                 break 
             
             self.current_block += 1
             
-            if not  self.current_block < len(flw["blocks"]):
+            if not self.current_block < len(flw["blocks"]):
                 break
 
         

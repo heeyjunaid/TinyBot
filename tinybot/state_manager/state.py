@@ -109,10 +109,10 @@ class StateBase:
         return "default_fallback", 1.0, False 
          
 
-    def init_block(self, block_type, response, rich_response = {}):
+    def init_block(self, block_type, response, rich_response = {}, slot_to_detect = [], context = {}):
         """ function will initialize respective block
         """
-        return self.block_type_mapping[block_type](response, rich_response)
+        return self.block_type_mapping[block_type](response, rich_response, slot_to_detect, context)
         
 
         
