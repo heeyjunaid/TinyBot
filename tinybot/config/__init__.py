@@ -12,3 +12,4 @@ class Config:
     classifier_head = "logistics-regression"
     model_caching_dir = "models"
     max_training_iter = 200 # max training iteration for ML model
+    fallback_response = "Sorry I didn't get that, can you repeat it again?"

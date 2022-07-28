@@ -85,3 +85,68 @@ flows:
                     - Delhi
                     - Pune
                     - Banglore
+
+    - name: Check Schedule
+      description: flow to check schedule
+      # intent on which the flow will trigger
+      trigger_intents:
+          - check_schedule
+      # defination of all the blocks
+      blocks:
+          - type: say
+            response: sure, I can definetly help you with that
+          - type: ask
+            response: where you would like to travel?
+            rich_response:
+                quick_replies:
+                    - Mumbai
+                    - Delhi
+                    - Pune
+                    - Banglore
+
+    - name: Book Hotel
+      description: flow to book hotel
+      # intent on which the flow will trigger
+      trigger_intents:
+          - book_hotel
+      # defination of all the blocks
+      blocks:
+          - type: say
+            response: sure, I can definetly help you with that
+          - type: ask
+            response: when you want to book your hotel?
+            slot:
+                - booking_date
+            rich_response:
+                quick_replies:
+                    - Tomorrow
+                    - Next Week
+                    - Next Month
+          - type: say
+            response: sure, On ${booking_date} I can find 3 hotels available for booking.
+          - type: ask
+            response: Which one you would like to choose ?
+            slot:
+                - booking_hotel
+            rich_response:
+                quick_replies:
+                    - JW Marriot
+                    - Radission Blue
+                    - Taj
+          - type: ask
+            response: Which suit you would like to choose ?
+            slot:
+                - booking_hotel_suite
+            rich_response:
+                quick_replies:
+                    - Queen
+                    - King
+                    - Presidential
+          - type: say
+            response: Done, I have booked you ${booking_hotel_suite} in ${booking_hotel} on ${booking_date}.
+          - type: say
+            response: Is there anything you would like me to do?.
+            rich_response:
+                quick_replies:
+                    - Book Ticket
+                    - Check Travel Schedule

@@ -89,7 +89,12 @@ def load(agent_dir):
 
 
 def print_repsonse(responses):
-    for res in responses:
-        print(res)
+    for response in responses:
+        if type(response) == list:
+            for res in response:
+                print(res)
+        else:
+            print(response)
+
     print("-"*100)
     

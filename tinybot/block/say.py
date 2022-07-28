@@ -5,4 +5,4 @@ __all__ = ["SayBlock"]
 
 class SayBlock(BlockBase):
     def __init__(self, response, rich_repsonse = {}) -> None:
-        super().__init__(response, rich_repsonse)
+        super().__init__("say", response, rich_repsonse)

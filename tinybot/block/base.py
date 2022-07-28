@@ -3,9 +3,10 @@ __all__ = ["BlockBase"]
 
 
 class BlockBase:
-    def __init__(self, response, rich_response) -> None:
+    def __init__(self, type, response, rich_response) -> None:
         """ Base class for all the blocks
         """
+        self.type = type
         self.response = response
         self.rich_response = rich_response
         self.stop_traversing = False  # flag to control the flow

@@ -1,3 +1,4 @@
+from tinybot.config import Config
 from numpy import block
 from tinybot.state_manager import StateBase
 
@@ -27,9 +28,15 @@ class StateManager(StateBase):
             block = self.init_block("say", intent)
             return block.compile_response(self.agent_name)
 
-        if intent != "default_fallback" and self.intent_flow_mapping.get(intent, None):
-            # start that flow
-            pass
+        if intent == "default_fallback":
+            block = self.init_block("say", Config.fallback_response)
+            return block.compile_response(self.agent_name)
+        
+        if self.intent_flow_mapping.get(intent, None) is not None:
+            # move to some other flow
+            self.current_flow = self.intent_flow_mapping.get(intent)
+            self.current_block = 0
+        
 
         # continue previous flow
         return self.process_flow_and_block()
@@ -44,9 +51,19 @@ class StateManager(StateBase):
     
     def process_flow_and_block(self):
         flw = self.flows[self.current_flow]
-        block = flw["blocks"][self.current_block]
-        block = self.init_block(block["type"], block["response"], block["rich_response"])
 
-        return block.compile_response(self.agent_name)
+        while True:
+            block = flw["blocks"][self.current_block]
+            block = self.init_block(block["type"], block["response"], block.get("rich_response", {}))
+
+            yield block.compile_response(self.agent_name)
+
+            if block.type == "ask":
+                break 
+            
+            self.current_block += 1
+            
+            if not  self.current_block < len(flw["blocks"]):
+                break
 
         
