@@ -31,3 +31,17 @@ How train your first bot?
            [Book Ticket] [Book Hotel] [Check Travel Schedule]
 ```
 
+# Features
+- Intent and small talk support
+- Knowledge Base/FAQ support
+- Multi flow and multi-turn conversations
+- Non-Linear Conversation support
+- Fallback Handling
+
+
+# ToDo Features
+- Support for regex and contextual slots
+- Support for short term context
+- Support for required slots and list slots
+- Support for selecting custom classifier head for BERT (currently only logistic regression is supported)
+- Support for finetuning custom language models 
