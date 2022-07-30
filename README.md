@@ -44,4 +44,11 @@ How train your first bot?
 - Support for short term context
 - Support for required slots and list slots
 - Support for selecting custom classifier head for BERT (currently only logistic regression is supported)
-- Support for finetuning custom language models 
+- Support for finetuning custom language models
+
+
+# TinyAPI
+  Api exposing TinyBot
+  
+# TinyDeploy
+  Automate deployment of TinyBot to Kubernetes
